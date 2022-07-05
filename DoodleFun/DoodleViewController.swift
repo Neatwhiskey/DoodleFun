@@ -2,7 +2,7 @@
 //  DoodleViewController.swift
 //  DoodleFun
 //
-//  Created by Simon Ng on 15/1/2021.
+//   Created by Jamaaldeen Opasina on 01/07/2022
 //
 
 import UIKit
@@ -21,6 +21,7 @@ class DoodleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = dataSource
+        collectionView.delegate = self
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout{
             layout.itemSize = CGSize(width: 128, height: 128)
             layout.estimatedItemSize = .zero
@@ -53,3 +54,9 @@ extension DoodleViewController{
     }
 }
 
+extension DoodleViewController:UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let sideSize = (traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular) ? 80.0 : 128.0
+        return CGSize(width: sideSize, height: sideSize)
+    }
+}
